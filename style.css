@@ -1,0 +1,29 @@
+.error {
+    color: red;
+    font-weight: bold;
+}
+.container {
+    max-width: 400px;
+    margin: 100px auto;
+}
+.login-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.card {
+    width: 20rem;
+    background-color:rgb(162,107,243);
+    border:solid;
+    border-color:rgb(162,107,243);
+    max-width:300px;
+    max-height:250px;
+    margin:20px;
+    border-radius:10px;
+}
+
+.card-footer {
+    color:rgb(255,255,255);
+    font-weight:500;
+}
