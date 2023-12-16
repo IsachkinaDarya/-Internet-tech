@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="container my-5" style = "background:rgb(176, 196, 222);padding:20px;border-radius:5px;width:700px;">
+  <div class="container my-5" style = "background:rgb(216, 191, 216);padding:20px;border-radius:5px;width:700px;">
     <h2>Добавление задачи</h2>
     <form action = "add.php" method="post">
       <div class="mb-3">
@@ -34,7 +34,7 @@
             $result = $conn->query($sql);
             while ($row = $result->fetch()){ 
             $value = (string) $row['name'].' '. $row['firstname'];?>
-            <option  value = <?php echo $row['id'];?>><?php echo $value; ?></option>>
+            <option  value = <?php echo $row['id'];?>><?php echo $value.'-'.$row['post']; ?></option>>
             <?php }?>
         </select>
       </div>

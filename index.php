@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container">
-        <form action="login.php" method="POST" class="login-form">
+    <div class="container" >
+        <form action="login.php" method="post" class="login-form" style="background:rgb(216, 191, 216);">
             <h2>Вход</h2>
             <?php
                 if(isset($_GET['error'])){
@@ -26,7 +26,7 @@
             </div>
             </br>
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">Войти</button>
+                <button type="submit" class="btn btn-dark">Войти</button>
             </div>
         </form>
     </div>
