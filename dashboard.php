@@ -19,6 +19,19 @@ $result = $conn->query($sql);
 
 $user =  $result->fetch();
 $count=0;
+
+
+//запрос к API
+$curl = curl_init();
+$url = "https://dog.ceo/api/breeds/image/random";
+//curl_setopt($curl, CURLOPT_PUT, 1);
+curl_setopt($curl, CURLOPT_URL, $url);
+curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+$result = curl_exec($curl);
+curl_close($curl);
+
+$img = explode('"', $result);
+//$img = explode(",", $mas[1]);
 ?>
 
 <!DOCTYPE html>
@@ -31,16 +44,19 @@ $count=0;
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="container" style="margin: 20px;">
-        <div class="row" style="width:450px;">
+    <div class="container" style="margin: 0 0 0 20px;">
+        <div class="row" style="width:650px;">
             <div class="col">
-            <h6 style="width:150px;">Добро пожаловать, <?php echo $user['username']; ?></h6>
+                <img src ="<?php echo $img[3]; ?>" style="max-width:120px; max-height:100px;padding:3px 0 3px 0;border-radius:5px;"> </img> 
             </div>
             <div class="col">
-            <a href="logout.php" class="btn btn-outline-secondary">Выход</a>
+            <h6 style="width:150px;margin: 20px 0 20px;">Добро пожаловать, <?php echo $user['username']; ?></h6>
             </div>
             <div class="col">
-            <a href="add_task.php" class="btn btn-danger" style="width:150px;">Добавить задачу</a>
+            <a href="logout.php" class="btn btn-outline-secondary" style="margin: 20px 0 20px;">Выход</a>
+            </div>
+            <div class="col">
+            <a href="add_task.php" class="btn btn-danger" style="width:150px;margin: 20px 0 20px;">Добавить задачу</a>
             </div>
         </div>  
     </div>
