@@ -14,6 +14,7 @@ $taskExecutor = $_POST["taskExecutor"];
 $taskDescription = $_POST["taskDescription"];
 $taskStatus = $_POST["taskStatus"];
 $dateres = $taskDate->format('Y-m-d H:i:s');
+$taskTeam = $_POST['taskTeam'];
 
 // Поиск пользователя в базе данных
 $sql = "SELECT * FROM public.users WHERE id='$taskExecutor'";
@@ -22,9 +23,9 @@ if($row = $result->fetch()){
     $taskExecutor = $row['name'].' '.$row['firstname'];
 }
 $sql = "INSERT INTO public.tasks (
-    project, tutor, date, status, description) VALUES (
+    project, tutor, date, status, description, team) VALUES (
         '$taskName', '$taskExecutor', 
-        '$dateres', '$taskStatus', '$taskDescription');";
+        '$dateres', '$taskStatus', '$taskDescription', '$taskTeam');";
 if ($conn->query($sql)){
         header('Location: dashboard.php');
         exit();

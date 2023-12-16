@@ -14,6 +14,7 @@ $conn = new PDO("pgsql:host='localhost';dbname='postgres'", 'postgres', '12345')
 if(!$conn){
     die('Ошибка подключения');
 }
+
 $id_task = $_GET['id_task'];
 $sql = "SELECT * FROM public.tasks WHERE id='$id_task'";
 $res = $conn->query($sql);
@@ -41,7 +42,8 @@ else{
         <label for="taskExecutor" class="form-label">Исполнитель</label>
         <select class="form-select" id="taskExecutor" name ="taskExecutor" required>
             <?php
-            $sql = "SELECT * FROM public.users order by firstname";
+            $team = $task['team'];
+            $sql = "SELECT * FROM public.users WHERE team='$team' order by firstname";
             $result = $conn->query($sql);
             while ($row = $result->fetch()){ 
             $value = (string) $row['name'].' '. $row['firstname'];

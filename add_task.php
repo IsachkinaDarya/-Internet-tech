@@ -30,7 +30,14 @@
             if(!$conn){
                 die('Ошибка подключения');
             }
-            $sql = "SELECT * FROM public.users order by firstname";
+
+            $user_id = $_COOKIE['user_id'];
+            $sql = "SELECT * FROM public.users WHERE id='$user_id'";
+            $result = $conn->query($sql);
+            $user =  $result->fetch();
+            $team = $user['team'];
+
+            $sql = "SELECT * FROM public.users WHERE team = '$team' order by firstname";
             $result = $conn->query($sql);
             while ($row = $result->fetch()){ 
             $value = (string) $row['name'].' '. $row['firstname'];?>
@@ -63,6 +70,9 @@
           </label>
         </div>
       </div>
+      <select name="taskTeam" id="taskTeam" style="display: none;">
+        <option value="<?php echo $team ?>" selected="selected"></option>
+      </select>
       <button type="submit" class="btn btn-outline-light" style="width:100%;">Добавить задачу</button>
   </form>
   </div>

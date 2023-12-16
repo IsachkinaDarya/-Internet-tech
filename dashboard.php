@@ -18,20 +18,17 @@ $sql = "SELECT * FROM public.users WHERE id='$user_id'";
 $result = $conn->query($sql);
 
 $user =  $result->fetch();
-$count=0;
-
+$team = $user['team'];
 
 //запрос к API
 $curl = curl_init();
 $url = "https://dog.ceo/api/breeds/image/random";
-//curl_setopt($curl, CURLOPT_PUT, 1);
 curl_setopt($curl, CURLOPT_URL, $url);
 curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 $result = curl_exec($curl);
 curl_close($curl);
 
 $img = explode('"', $result);
-//$img = explode(",", $mas[1]);
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +57,7 @@ $img = explode('"', $result);
             </div>
         </div>  
     </div>
-        <div class="row" style="background:rgb(218, 112, 214);paddinr-bottom:100px;">
+        <div class="row" style="background:rgb(218, 112, 214);paddinr-bottom:100px;height:full">
             <div class="col" style="margin:5px 0px 5px 0px;text-align:center;font-size:130%;font-weight:bolder;color:rgb(255, 240, 245);">
             Не начато
             </div>
@@ -71,11 +68,12 @@ $img = explode('"', $result);
             Завершено
             </div>
         </div>
+        <div class="container" style="margin:0;padding: 0; background: rgb(255, 240, 245);min-height:800px;min-width:100%">
         <div class="row" style="background:rgb(255, 240, 245);border-top:dashed rgb(75, 0, 130);padding-top:10px;">
             <div class="col">
                 <?php 
                 $x = new PDO("pgsql:host='localhost';dbname='postgres'", 'postgres', '12345'); 
-                $result = $x->query("SELECT * FROM public.tasks order by date");
+                $result = $x->query("SELECT * FROM public.tasks WHERE team='$team' order by date");
                 while ($row = $result->fetch()){ 
                 if($row['status']=="Не начато"){ ?>
                 
@@ -135,7 +133,7 @@ $img = explode('"', $result);
             </div>
             <div class="col"> 
                 <?php  
-                    $result = $x->query("SELECT * FROM public.tasks order by date");
+                    $result = $x->query("SELECT * FROM public.tasks WHERE team='$team' order by date");
                     while ($row = $result->fetch()){ 
                     if($row['status']=="В разработке"){ ?>
 
@@ -196,7 +194,7 @@ $img = explode('"', $result);
 
             <div class="col"> 
                 <?php  
-                    $result = $x->query("SELECT * FROM public.tasks order by date");
+                    $result = $x->query("SELECT * FROM public.tasks WHERE team='$team' order by date");
                     while ($row = $result->fetch()){ 
                     if($row['status']=="Завершено"){ ?>
 
@@ -255,6 +253,7 @@ $img = explode('"', $result);
                 <?php }} ?>
             </div>
         </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
     
 </body>

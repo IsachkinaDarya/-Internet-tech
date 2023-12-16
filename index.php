@@ -24,6 +24,9 @@
                 <label for="password">Пароль:</label>
                 <input type="password" id="password" name="password" class="form-control" required>
             </div>
+            <p>
+                <a href="registration.html" class="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Регистрация</a>
+            </p>
             </br>
             <div class="form-group">
                 <button type="submit" class="btn btn-dark">Войти</button>
