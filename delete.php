@@ -1,4 +1,8 @@
 <?php
+if(!isset($_COOKIE['user_id'])){
+    header('Location: index.php?error=Доступ запрещен');
+    exit();
+}
 // Подключение к базе данных
 $conn = new PDO("pgsql:host='localhost';dbname='postgres'", 'postgres', '12345');
 

@@ -24,6 +24,10 @@
         <select class="form-select" id="taskExecutor" name ="taskExecutor" required>
             <option selected>Выберите исполнителя</option>
             <?php
+            if(!isset($_COOKIE['user_id'])){
+              header('Location: index.php?error=Доступ запрещен');
+              exit();
+            }
             // Подключение к базе данных
             $conn = new PDO("pgsql:host='localhost';dbname='postgres'", 'postgres', '12345');
 
@@ -58,9 +62,9 @@
           </label>
         </div>
         <div class="form-check">
-          <input class="form-check-input" type="radio" name="taskStatus" id="taskStatus2" value="В процессе">
+          <input class="form-check-input" type="radio" name="taskStatus" id="taskStatus2" value="В разработке">
           <label class="form-check-label" for="taskStatus2">
-            В процессе
+            В разработке
           </label>
         </div>
         <div class="form-check">
